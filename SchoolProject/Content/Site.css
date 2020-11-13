@@ -29,6 +29,10 @@ ul#teacher-courses li, ul#list-teachers li {
     color: dimgray;
 }
 
+h2{
+    text-transform:uppercase;
+}
+
 form{
     background-color:darkseagreen;
     padding:0.3em 1em;

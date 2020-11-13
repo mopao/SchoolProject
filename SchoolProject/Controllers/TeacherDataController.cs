@@ -92,49 +92,26 @@ namespace SchoolProject.Controllers
                 MySqlCommand cmd = Conn.CreateCommand();
 
                 //SQL QUERY
-                cmd.CommandText = "Select teachers.*, classname, classcode, startdate, finishdate from teachers left join classes on  " +
-                "teachers.teacherid=classes.teacherid  where teachers.teacherid="+ id;
+                cmd.CommandText = "Select * from teachers where teacherid="+ id;
 
                 //Gather Result Set of Query into a variable
                 MySqlDataReader ResultSet = cmd.ExecuteReader();
-                int i = 0;
+                
                 //Loop Through Each Row the Result Set
                 while (ResultSet.Read())
-                {
-                    if (i == 0)
-                    {
-                        //Access Column information by the DB column name as an index                
-                        newTeacher.id = ResultSet.GetInt32(0);
-                        newTeacher.firstname = ResultSet.GetString(1);
-                        newTeacher.lastname = ResultSet.GetString(2);
-                        newTeacher.employeeNumber = ResultSet.GetString(3);
-                        newTeacher.hireDate = ResultSet.GetDateTime(4);
-                        newTeacher.salary = ResultSet.GetDecimal(5);
-                        // add the new class to the teacher
-                        Class newClass = new Class();
-                        newClass.className = ResultSet["classname"].ToString();
-                        newClass.classCode = ResultSet["classcode"].ToString();
-                        newClass.startDate = ResultSet["startdate"].ToString();
-                        newClass.finishDate = ResultSet["finishdate"].ToString();
-                        newTeacher.classes.Add(newClass);
-                        i += 1;
-                    }
-                    else
-                    {
-                        // the teacher has more than one class,
-                        // registered the new class
-                        Class newClass = new Class();
-                        newClass.className = ResultSet["classname"].ToString();
-                        newClass.classCode = ResultSet["classcode"].ToString();
-                        newClass.startDate = ResultSet["startdate"].ToString();
-                        newClass.finishDate = ResultSet["finishdate"].ToString();
-
-                        newTeacher.classes.Add(newClass);
-                    }
+                {      
+                    //Access Column information by the DB column name as an index                
+                    newTeacher.id = ResultSet.GetInt32(0);
+                    newTeacher.firstname = ResultSet.GetString(1);
+                    newTeacher.lastname = ResultSet.GetString(2);
+                    newTeacher.employeeNumber = ResultSet.GetString(3);
+                    newTeacher.hireDate = ResultSet.GetDateTime(4);
+                    newTeacher.salary = ResultSet.GetDecimal(5);               
                 }
 
                 //Close the connection between the MySQL Database and the WebServer
                 Conn.Close();
+
             }
             //Return the final list of teachers names
             return newTeacher;

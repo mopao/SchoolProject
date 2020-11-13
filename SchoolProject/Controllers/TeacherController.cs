@@ -34,8 +34,12 @@ namespace SchoolProject.Controllers
        public ActionResult Show( int? id)
         {
             //we will to gather the list of teachers 
-            TeacherDataController controller = new TeacherDataController();
-            Teacher teacher = controller.GetTeacherById(id);
+            TeacherDataController teacherController = new TeacherDataController();
+            Teacher teacher = teacherController.GetTeacherById(id);
+            // gather teacher classes
+            ClassDataController classesController = new ClassDataController();
+            teacher.classes = classesController.ListTeachersClasses(id);
+
             return View(teacher); ;
         }
     }
