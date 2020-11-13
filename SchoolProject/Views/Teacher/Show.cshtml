@@ -1,0 +1,33 @@
+﻿@model SchoolProject.Models.Teacher
+@{
+    ViewBag.Title = "Teacher profile";
+}
+
+<form>
+    <h2>Profile</h2>
+    <div>
+        <label for="fname">Fisrtname:</label> <span id="fname">@Model.firstname </span>
+    </div>
+    <div>
+        <label for="lname">Lastname:</label> <span id="lname">@Model.lastname</span>
+    </div>
+    <div>
+        <label for="employeeNb">Employee number:</label>  <span id="employeeNb">@Model.employeeNumber </span>
+    </div>
+    <div>
+        <label for="hireDate">Hire date:</label> <span id="hireDate"> @Model.hireDate </span>
+    </div>
+    <div>
+        <label for="salary">Salary:</label> <span id="salary">@Model.salary</span>
+    </div>
+    <div>
+        <label for="classes">Course(s):</label>
+        <ul id="teacher-courses"> @foreach(var course in Model.classes)
+        {
+            <li>@course.className</li>
+        }
+        </ul>
+    </div>
+
+</form>
+

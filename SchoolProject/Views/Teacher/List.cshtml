@@ -1,0 +1,13 @@
+﻿@model List<SchoolProject.Models.Teacher>
+@{
+    ViewBag.Title = "teachers List ";
+}
+
+<h2>List of teachers</h2>
+<ul id="list-teachers">
+    @foreach(SchoolProject.Models.Teacher teacher in Model)
+    {
+        <li><a href="Show?id=@teacher.id">@string.Format("{0} {1}",@teacher.firstname, @teacher.lastname)</a></li>
+    }
+</ul>
+
